@@ -13,6 +13,20 @@ class Library():
         for book in self.all_books:
             print(book)
 
+    def display_lend_books(self,name,book):
+        if book not in self.all_books:
+            print("please eneter the proper book")
+            return
+        if book in self.available_books:
+            self.lend_books.update({book:name})
+            self.available_books.remove(book)
+            print("you can take the book")
+        else:
+            print("this book is taken by" + self.lend_books[book])
+
+    def display_return_book(self,book):
+        del self.lend_books[book]
+        self.available_books.append(book)
 
 
 
@@ -33,6 +47,13 @@ if __name__ == "__main__":
             lib.display_available_books()
         elif value == 2:
             lib.display_all_books_list()
+        elif value ==3:
+            name = input("please enter the name")
+            book = input("please enetr the book")
+            lib.display_lend_books(name,book)
+        elif value ==4:
+            book = input("please enter the name of the book")
+            lib.display_return_book(book)
         if value == 5:
             break
 
